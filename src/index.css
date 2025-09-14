@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0B0F1A; /* same as footer */
+}
+
+.logo-icon {
+  width: 55px;   /* Increase size */
+  height: 55px;
+  margin-right: 12px;
+  object-fit: contain; /* Prevent distortion */
+}
+
+
+
+.navbar-brand {
+  margin-left: 100px; /* adjust as you like */
+}
+
+/* Header */
+.navbar {
+  background-color: #0a141f !important;
+}
+
+/* Links */
+.nav-link {
+  color: #e0f7fa !important;
+  transition: 0.3s;
+}
+.nav-link:hover {
+  color: #14b8a6 !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #1e3a8a;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #14b8a6;
+  color: #0a0f1f;
+}
+
+/* Section below video */
+section {
+  background: #0f172a;
+  color: #e0f7fa;
+  padding: 4rem 2rem;
+}
+
+/* Card / Glass effect */
+.glass-card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 2rem;
+  color: #e0f7fa;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background: #00e6e6;
+  color: #111;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+/* Container for buttons */
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px; /* space between buttons */
+  justify-content: center;
+  flex-wrap: wrap; /* responsive wrapping on small screens */
+}
+
+
+
+
+

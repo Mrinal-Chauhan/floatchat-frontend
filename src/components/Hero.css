@@ -1,0 +1,338 @@
+/* Hero Section stays transparent for video */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* Keep hero video visible */
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+}
+
+/* Overlay text */
+.hero-title {
+  font-size: 6rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.hero-tagline {
+  font-size: 2rem;
+  margin-top: 1rem;
+  color: #e0f7fa;
+  text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* ✅ Sections below video */
+.page-section {
+  background: #0f172a; /* dark ocean blue */
+  color: #e0f7fa;
+  padding: 4rem 2rem;
+}
+
+/* Cards */
+.glass-card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 2rem;
+  color: #e0f7fa;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+/* Overlay container centered */
+.hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 3;
+}
+
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative; /* make it above video */
+  z-index: 2; /* same as overlay */
+}
+
+/* Buttons styling (same as before) */
+.btn {
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #4688e5;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  margin-top : 58vh;
+}
+
+.btn:hover {
+  background: #4688e5;
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+.btn.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn.secondary:hover {
+  background: white;
+  color: #4688e5;
+  transform: scale(1.1);;
+}
+
+.features-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #0b0f1a;
+  color: #fff;
+}
+
+.features-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #00d4ff;
+  margin-bottom: 0.5rem;
+}
+
+.features-subtitle {
+  font-size: 1rem;
+  margin-bottom: 3rem;
+  color: #cdd6f4;
+}
+
+.features-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: #111827;
+  padding: 2rem;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+  cursor: pointer;
+}
+
+.feature-card .icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* About Section */
+.about-section {
+  background: #0b0f1a; /* dark navy */
+  color: #e0f7fa;
+  padding: 4rem 2rem;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* makes it responsive */
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 450px;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00d4ff;
+  margin-bottom: 1rem;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Container styling */
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 5rem 2rem;
+}
+
+/* Image animation */
+.about-image {
+  flex: 1;
+  opacity: 0;
+  transform: translateX(-100px);
+  animation: slideInLeft 1.5s ease-out forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Text animation */
+.about-text {
+  flex: 1;
+  opacity: 0;
+  transform: translateX(100px);
+  animation: slideInRight 1.5s ease-out forwards;
+  animation-delay: 0.4s; /* small stagger for smoothness */
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Image styling */
+.about-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+}
+
+/* About Section Layout */
+.about-section {
+  padding: 5rem 1rem;
+  padding-bottom: 1rem;  /* reduce space so footer hugs it */
+  margin-bottom: 0;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+
+.about-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+}
+
+.about-text {
+  flex: 1;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.footer {
+
+  
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 60px;
+  margin-bottom: -190px;
+}
+
+.footer-title {
+  color: #4cc9f0;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-text {
+  max-width: 700px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+  color: #cccccc;
+}
+
+.footer-divider {
+  border: none;
+  border-top: 1px solid #2c2f3a;
+  margin: 20px auto;
+  width: 80%;
+}
+
+.footer-copy {
+  font-size: 14px;
+  color: #aaaaaa;
+}
+
+
+/* 🌊 Right-to-left gentle floating */
+@keyframes move-right-to-left {
+  from {
+    transform: translateX(20px);
+  }
+  to {
+    transform: translateX(-20px);
+  }
+}
+
+/* Planet slow drift */
+.planet-move {
+  animation: move-right-to-left 6s ease-in-out infinite alternate;
+}
+
+/* Argo float faster drift */
+.float-move {
+  animation: move-right-to-left 4s ease-in-out infinite alternate;
+}
+
+
+
+
+
+
+
