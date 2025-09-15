@@ -19,7 +19,7 @@ export default function Hero() {
                 </div>
 
                 <div className="buttons">
-                    <button className="btn">View Dashboard</button>
+                    <Link to="/dashboard" className="btn">View Dashboard</Link>
                     <Link to="/chatbot" className="btn secondary">
                         Start A Chat
                     </Link>

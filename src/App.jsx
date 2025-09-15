@@ -1,7 +1,10 @@
-import Header from "./components/Header";
-import Home from "./pages/Home";
-import Chatbot from "./pages/Chatbot"; // ✅ make sure this is imported
-import { Routes, Route } from "react-router-dom";
+// src/App.jsx
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Home from './pages/Home';
+import Chatbot from './pages/Chatbot';
+import Dashboard from './pages/Dashboard'; // Check this line
 
 function App() {
   return (
@@ -9,12 +12,11 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/chatbot" element={<Chatbot />} />     {/* chat UI */}
-        <Route path="/dashboard" element={<h2>Dashboard Page</h2>} />
+        <Route path="/chatbot" element={<Chatbot />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </>
   );
 }
 
 export default App;
-
