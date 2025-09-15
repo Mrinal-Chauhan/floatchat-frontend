@@ -1,6 +1,6 @@
 /* This rule is the main fix. It ensures the dashboard has space and visible text. */
 .dashboard-container {
-  padding: 8rem 2rem 2rem 2rem; /* Added extra top padding to clear the header */
+  padding: 4rem 2rem 2rem 2rem; /* Added extra top padding to clear the header */
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
