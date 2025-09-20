@@ -75,3 +75,8 @@
 .trend-value.large-green { color: #28a745; }
 @media (max-width: 992px) { .content-grid { grid-template-columns: 1fr; } }
 @media (max-width: 768px) { .stats-grid, .trends-grid { grid-template-columns: 1fr; } }
+/* ✅ Light color for region names in coverage list */
+.coverage-header span:first-child {
+  color: #cfd8e3; /* light, readable on dark background */
+  font-weight: 500;
+}
