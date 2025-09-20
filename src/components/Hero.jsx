@@ -19,7 +19,7 @@ export default function Hero() {
                 </div>
 
                 <div className="buttons">
-                    <Link to="/dashboard" className="btn">View Dashboard</Link>
+                    <button className="btn">View Dashboard</button>
                     <Link to="/chatbot" className="btn secondary">
                         Start A Chat
                     </Link>
@@ -37,34 +37,25 @@ export default function Hero() {
                     <div className="feature-card">
                         <div className="icon">💬</div>
                         <h3>AI-Powered Chat</h3>
-                        <p>Query ARGO ocean data using natural language and get intelligent insights.</p>
-                        <br></br>
-                        <p>No coding or domain expertise required. Simply ask and explore</p>
-                        
+                        <p>Query ARGO ocean data using natural language and get intelligent insights</p>
                     </div>
 
                     <div className="feature-card">
                         <div className="icon">📊</div>
                         <h3>Data Visualization</h3>
-                        <p>Interactive dashboards with real-time data obtained by ocean monitoring</p>
-                        <br></br>
-                        <p>Dynamic dashboards powered by real-time ARGO and BGC datasets</p>
+                        <p>Interactive dashboards with real-time ocean monitoring data</p>
                     </div>
 
                     <div className="feature-card">
                         <div className="icon">🗄️</div>
                         <h3>ARGO Integration</h3>
-                        <p>Direct access to global ocean float sensor network data for everyone</p>
-                        <br />
-                        <p>Seamless extraction, storage, and retrieval with SQL and vector databases</p>
+                        <p>Direct access to global ocean float sensor network data</p>
                     </div>
 
                     <div className="feature-card">
                         <div className="icon">🔍</div>
                         <h3>Smart Discovery</h3>
                         <p>Find patterns and trends in oceanographic data effortlessly</p>
-                        <br />
-                        <p>RAG-enabled LLM pipelines help translate natural language to database queries</p>
                     </div>
                 </div>
 
