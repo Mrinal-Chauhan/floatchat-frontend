@@ -238,6 +238,147 @@
   text-align: right;
 }
 
+/* React Markdown Formatting Styles */
+.bubble-text h1,
+.bubble-text .message-header-1 {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin: 0.8em 0 0.4em 0;
+  color: #00c8ff;
+  border-bottom: 1px solid rgba(0, 200, 255, 0.3);
+  padding-bottom: 0.2em;
+}
+
+.bubble-text h2,
+.bubble-text .message-header-2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0.6em 0 0.3em 0;
+  color: #4dd0ff;
+}
+
+.bubble-text h3,
+.bubble-text .message-header-3 {
+  font-size: 1.05em;
+  font-weight: bold;
+  margin: 0.5em 0 0.2em 0;
+  color: #80dfff;
+}
+
+.bubble-text p,
+.bubble-text .message-paragraph {
+  margin: 0.3em 0;
+  line-height: 1.4;
+}
+
+.bubble-text p:first-child,
+.bubble-text .message-paragraph:first-child {
+  margin-top: 0;
+}
+
+.bubble-text p:last-child,
+.bubble-text .message-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.bubble-text ul,
+.bubble-text .message-ul {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.bubble-text ol,
+.bubble-text .message-ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.bubble-text li,
+.bubble-text .message-li {
+  margin: 0.2em 0;
+  line-height: 1.4;
+}
+
+.bubble-text pre,
+.bubble-text .message-code-block {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 0.8em;
+  margin: 0.5em 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #a8e6cf;
+  overflow-x: auto;
+}
+
+.bubble-text pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* Inline formatting */
+.bubble-text strong,
+.bubble-text .message-strong {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.bubble-text code,
+.bubble-text .message-code {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  padding: 0.1em 0.3em;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #ffb3d9;
+}
+
+/* Error message styling */
+.message-row.error-message .bubble {
+  background: linear-gradient(180deg, #4a1a1a, #2d1111);
+  border: 1px solid rgba(255, 100, 100, 0.2);
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.typing-indicator span {
+  height: 8px;
+  width: 8px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 50%;
+  animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  30% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
 /* Input area */
 .chat-input-area {
   display: flex;
@@ -259,6 +400,11 @@
   font-size: 0.95rem;
 }
 
+.chat-input-area input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .send-btn {
   background: linear-gradient(180deg,#00c8ff,#00a0d6);
   color: #001419;
@@ -267,6 +413,13 @@
   border-radius: 10px;
   cursor: pointer;
   font-weight: 700;
+  transition: opacity 0.2s ease;
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: linear-gradient(180deg, #666, #555);
 }
 
 /* responsive */

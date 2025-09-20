@@ -1,9 +1,42 @@
 import React, { useState, useEffect, useRef } from "react";
+import ReactMarkdown from 'react-markdown';
 import "./Chatbot.css";
+
+// Generate a unique session ID for each chat
+function generateSessionId() {
+  return `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+}
+
+// API service function to send messages to backend
+async function sendMessageToAPI(message, sessionId) {
+  try {
+    const response = await fetch('http://localhost:8000/api/v1/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: message,
+        session_id: sessionId
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.response;
+  } catch (error) {
+    console.error('API Error:', error);
+    throw error;
+  }
+}
 
 function sampleInitialChat() {
   return {
     id: Date.now().toString(),
+    sessionId: generateSessionId(),
     title: "Welcome — ARGO Data Chat",
     messages: [
       {
@@ -19,6 +52,7 @@ export default function Chatbot() {
   const [chats, setChats] = useState(() => [sampleInitialChat()]);
   const [activeChatId, setActiveChatId] = useState(chats[0].id);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const chatEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -41,6 +75,7 @@ export default function Chatbot() {
   const createNewChat = () => {
     const newChat = {
       id: Date.now().toString(),
+      sessionId: generateSessionId(),
       title: "New chat",
       messages: [
         {
@@ -66,26 +101,54 @@ export default function Chatbot() {
     );
   };
 
-  const sendMessage = () => {
-    if (!input.trim()) return;
+  const sendMessage = async () => {
+    if (!input.trim() || isLoading) return;
+    
     const userMsg = {
       sender: "user",
       text: input.trim(),
       time: new Date().toISOString(),
     };
+    
+    // Add user message immediately
     addMessageToChat(activeChatId, userMsg);
+    const userMessage = input.trim();
     setInput("");
+    setIsLoading(true);
     inputRef.current?.focus();
 
-    // placeholder bot reply (simulate latency)
-    setTimeout(() => {
+    try {
+      // Get the active chat's session ID
+      const currentChat = chats.find((c) => c.id === activeChatId);
+      if (!currentChat) {
+        throw new Error('No active chat found');
+      }
+
+      // Call the API
+      const botResponse = await sendMessageToAPI(userMessage, currentChat.sessionId);
+      
+      // Add bot response
       const botMsg = {
         sender: "bot",
-        text: "This is a sample ARGO dataset reply.",
+        text: botResponse,
         time: new Date().toISOString(),
       };
       addMessageToChat(activeChatId, botMsg);
-    }, 600);
+      
+    } catch (error) {
+      console.error('Failed to send message:', error);
+      
+      // Add error message
+      const errorMsg = {
+        sender: "bot",
+        text: "Sorry, I'm having trouble connecting to the server. Please check if the backend is running and try again.",
+        time: new Date().toISOString(),
+        isError: true,
+      };
+      addMessageToChat(activeChatId, errorMsg);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleSuggestionClick = (text) => {
@@ -137,17 +200,11 @@ export default function Chatbot() {
 
         {/* Suggested prompts */}
         <div className="suggestions-row">
-          <button onClick={() => handleSuggestionClick("Show me temperature trends in the Pacific Ocean")}>
-            Show me temperature trends in the Pacific Ocean
+          <button onClick={() => handleSuggestionClick("Tell me more about the float near -43.513, 35.468")}>
+            Tell me more about the float near -43.513, 35.468
           </button>
-          <button onClick={() => handleSuggestionClick("What's the salinity data for the Atlantic?")}>
-            What's the salinity data for the Atlantic?
-          </button>
-          <button onClick={() => handleSuggestionClick("Find recent float deployments")}>
-            Find recent float deployments
-          </button>
-          <button onClick={() => handleSuggestionClick("Compare ocean temperatures year over year")}>
-            Compare ocean temperatures year over year
+          <button onClick={() => handleSuggestionClick("Find profiles from 'Argo Australia' project")}>
+            Find profiles from 'Argo Australia' project
           </button>
         </div>
 
@@ -156,20 +213,50 @@ export default function Chatbot() {
           {activeChat?.messages?.map((msg, idx) => (
             <div
               key={idx}
-              className={`message-row ${msg.sender === "user" ? "from-user" : "from-bot"}`}
+              className={`message-row ${msg.sender === "user" ? "from-user" : "from-bot"} ${msg.isError ? "error-message" : ""}`}
             >
-              
-
               <div className="bubble">
-                <div className="bubble-text">{msg.text}</div>
+                <div className="bubble-text">
+                  {msg.sender === "bot" ? (
+                    <ReactMarkdown
+                      components={{
+                        h1: ({children}) => <h1 className="message-header-1">{children}</h1>,
+                        h2: ({children}) => <h2 className="message-header-2">{children}</h2>,
+                        h3: ({children}) => <h3 className="message-header-3">{children}</h3>,
+                        strong: ({children}) => <strong className="message-strong">{children}</strong>,
+                        code: ({children}) => <code className="message-code">{children}</code>,
+                        pre: ({children}) => <pre className="message-code-block">{children}</pre>,
+                        ul: ({children}) => <ul className="message-ul">{children}</ul>,
+                        ol: ({children}) => <ol className="message-ol">{children}</ol>,
+                        li: ({children}) => <li className="message-li">{children}</li>,
+                        p: ({children}) => <p className="message-paragraph">{children}</p>
+                      }}
+                    >
+                      {msg.text}
+                    </ReactMarkdown>
+                  ) : (
+                    msg.text
+                  )}
+                </div>
                 <div className="bubble-time">
                   {new Date(msg.time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                 </div>
               </div>
-
-              
             </div>
           ))}
+
+          {/* Loading indicator */}
+          {isLoading && (
+            <div className="message-row from-bot">
+              <div className="bubble">
+                <div className="bubble-text typing-indicator">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div ref={chatEndRef} />
         </section>
@@ -179,13 +266,19 @@ export default function Chatbot() {
           <input
             ref={inputRef}
             type="text"
-            placeholder="Ask about ocean temperature, salinity, or any ARGO data..."
+            placeholder={isLoading ? "Sending..." : "Ask about ocean temperature, salinity, or any ARGO data..."}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            onKeyDown={(e) => e.key === "Enter" && !isLoading && sendMessage()}
+            disabled={isLoading}
           />
-          <button className="send-btn" onClick={sendMessage} aria-label="Send">
-            ➤
+          <button 
+            className="send-btn" 
+            onClick={sendMessage} 
+            disabled={isLoading || !input.trim()}
+            aria-label="Send"
+          >
+            {isLoading ? "..." : "➤"}
           </button>
         </div>
       </main>
