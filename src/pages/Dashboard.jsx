@@ -69,12 +69,7 @@ const Dashboard = () => {
       </div>
 
       {/* Section 4: Data Quality & Trends */}
-      <div className="trends-grid">
-        {/* ... your trends cards ... */}
-        <div className="card trend-card"><span className="trend-label">Data Quality Score</span><span className="trend-value large-green">98.7%</span></div>
-        <div className="card trend-card"><span className="trend-label">Update Frequency</span><span className="trend-value">24h</span></div>
-        <div className="card trend-card"><span className="trend-label">Total Data Volume</span><span className="trend-value">156TB</span></div>
-      </div>
+      
     </div>
   );
 };
